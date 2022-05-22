@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Amr/AndroidStudioProjects/ECBuy/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2675925925925926" />
+        <entry key="..\:/Users/Amr/AndroidStudioProjects/ECBuy/app/src/main/res/drawable/app_gradient_color_background.xml" value="0.43846153846153846" />
+        <entry key="..\:/Users/Amr/AndroidStudioProjects/ECBuy/app/src/main/res/drawable/button_background.xml" value="0.2675925925925926" />
+        <entry key="..\:/Users/Amr/AndroidStudioProjects/ECBuy/app/src/main/res/drawable/drawable_gender_tab_selector.xml" value="0.43846153846153846" />
+        <entry key="..\:/Users/Amr/AndroidStudioProjects/ECBuy/app/src/main/res/drawable/drawable_gender_tab_text_color_selector.xml" value="0.43846153846153846" />
+        <entry key="..\:/Users/Amr/AndroidStudioProjects/ECBuy/app/src/main/res/drawable/ic_back.xml" value="0.43846153846153846" />
+        <entry key="..\:/Users/Amr/AndroidStudioProjects/ECBuy/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.4148148148148148" />
+        <entry key="..\:/Users/Amr/AndroidStudioProjects/ECBuy/app/src/main/res/drawable/ic_vector_dashboard.xml" value="0.4148148148148148" />
+        <entry key="..\:/Users/Amr/AndroidStudioProjects/ECBuy/app/src/main/res/drawable/ic_vector_right.xml" value="0.4148148148148148" />
+        <entry key="..\:/Users/Amr/AndroidStudioProjects/ECBuy/app/src/main/res/drawable/item_gray_border_background.xml" value="0.4148148148148148" />
+        <entry key="..\:/Users/Amr/AndroidStudioProjects/ECBuy/app/src/main/res/drawable/user_image_background.xml" value="0.43846153846153846" />
+        <entry key="..\:/Users/Amr/AndroidStudioProjects/ECBuy/app/src/main/res/layout-v23/activity_login.xml" value="0.42916666666666664" />
+        <entry key="..\:/Users/Amr/AndroidStudioProjects/ECBuy/app/src/main/res/layout/activity_base.xml" value="0.42916666666666664" />
+        <entry key="..\:/Users/Amr/AndroidStudioProjects/ECBuy/app/src/main/res/layout/activity_dashboard.xml" value="0.25" />
+        <entry key="..\:/Users/Amr/AndroidStudioProjects/ECBuy/app/src/main/res/layout/activity_forgot_password.xml" value="0.33" />
+        <entry key="..\:/Users/Amr/AndroidStudioProjects/ECBuy/app/src/main/res/layout/activity_login.xml" value="0.4046296296296296" />
+        <entry key="..\:/Users/Amr/AndroidStudioProjects/ECBuy/app/src/main/res/layout/activity_main.xml" value="0.42916666666666664" />
+        <entry key="..\:/Users/Amr/AndroidStudioProjects/ECBuy/app/src/main/res/layout/activity_register.xml" value="0.4074074074074074" />
+        <entry key="..\:/Users/Amr/AndroidStudioProjects/ECBuy/app/src/main/res/layout/activity_settings.xml" value="0.33" />
+        <entry key="..\:/Users/Amr/AndroidStudioProjects/ECBuy/app/src/main/res/layout/activity_splash.xml" value="0.225" />
+        <entry key="..\:/Users/Amr/AndroidStudioProjects/ECBuy/app/src/main/res/layout/activity_user_profile.xml" value="0.37222222222222223" />
+        <entry key="..\:/Users/Amr/AndroidStudioProjects/ECBuy/app/src/main/res/layout/dialog_progress.xml" value="0.42916666666666664" />
+        <entry key="..\:/Users/Amr/AndroidStudioProjects/ECBuy/app/src/main/res/layout/fragment_dashboard.xml" value="0.42916666666666664" />
+        <entry key="..\:/Users/Amr/AndroidStudioProjects/ECBuy/app/src/main/res/layout/fragment_home.xml" value="0.42916666666666664" />
+        <entry key="..\:/Users/Amr/AndroidStudioProjects/ECBuy/app/src/main/res/menu/bottom_nav_menu.xml" value="0.37222222222222223" />
+        <entry key="..\:/Users/Amr/AndroidStudioProjects/ECBuy/app/src/main/res/menu/dashboard_menu.xml" value="0.42916666666666664" />
+        <entry key="..\:/Users/Amr/AndroidStudioProjects/ECBuy/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2635416666666667" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
