@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -35,7 +36,8 @@ class UserProfileActivity : BaseActivity() {
         setUserDetailsOnScreen()
         setListeners()
 
-
+        // If the Intent came from Settings Activity.
+        handleProfileEditScreen()
     }
 
     private fun getUserDetails() {
@@ -49,7 +51,9 @@ class UserProfileActivity : BaseActivity() {
         mActivityUserProfileBinding.edFirstName.setText(mUserDetails.firstName)
         mActivityUserProfileBinding.edLastName.setText(mUserDetails.lastName)
         mActivityUserProfileBinding.edEmail.setText(mUserDetails.email)
-        mActivityUserProfileBinding.tilMobileNumber.requestFocus()
+        if (mUserDetails.profileCompleted == 0) {
+            mActivityUserProfileBinding.tilMobileNumber.requestFocus()
+        }
     }
 
     private fun setListeners() {
@@ -70,6 +74,9 @@ class UserProfileActivity : BaseActivity() {
                     updateUserProfileDetails()
                 }
             }
+        }
+        mActivityUserProfileBinding.ivBack.setOnClickListener {
+            onBackPressed()
         }
     }
 
@@ -137,8 +144,49 @@ class UserProfileActivity : BaseActivity() {
         }
     }
 
+    /**
+    If the Intent came from Settings Activity.
+     */
+    private fun handleProfileEditScreen() {
+        if (mUserDetails.profileCompleted != 0) {
+            // Edit the Screen info
+            mActivityUserProfileBinding.tvTitle.text = resources.getString(R.string.edit_profile)
+            mActivityUserProfileBinding.ivBack.visibility = View.VISIBLE
+
+            // Add the Missing Data about the User.
+            GlideLoader(this@UserProfileActivity).loadUserImage(
+                mUserDetails.image,
+                mActivityUserProfileBinding.ivUserPhoto
+            )
+            if (mUserDetails.mobile != 0L) {
+                mActivityUserProfileBinding.edMobileNumber.setText(mUserDetails.mobile.toString())
+            }
+            if (mUserDetails.gender == Constants.MALE) {
+                mActivityUserProfileBinding.rbMale.isChecked = true
+            } else {
+                mActivityUserProfileBinding.rbFemale.isChecked = true
+            }
+
+            // Enable access and edit the EditTexts.
+            mActivityUserProfileBinding.edFirstName.isEnabled = true
+            mActivityUserProfileBinding.edLastName.isEnabled = true
+            mActivityUserProfileBinding.tilFirstName.background = null
+            mActivityUserProfileBinding.tilLastName.background = null
+
+        }
+    }
+
     private fun updateUserProfileDetails() {
         val userHashMap = HashMap<String, Any>()
+
+        val firstName = mActivityUserProfileBinding.edFirstName.text.toString().trim { it <= ' ' }
+        if (firstName != mUserDetails.firstName) {
+            userHashMap[Constants.FIRST_NAME] = firstName
+        }
+        val lastName = mActivityUserProfileBinding.edLastName.text.toString().trim { it <= ' ' }
+        if (firstName != mUserDetails.lastName) {
+            userHashMap[Constants.LAST_NAME] = lastName
+        }
         val mobileNumber =
             mActivityUserProfileBinding.edMobileNumber.text.toString()
                 .trim { it <= ' ' }
@@ -153,8 +201,14 @@ class UserProfileActivity : BaseActivity() {
             userHashMap[Constants.IMAGE] = mUserProfileImageURL
         }
 
-        userHashMap[Constants.MOBILE] = mobileNumber.toLong()
-        userHashMap[Constants.GENDER] = gender
+        if (mobileNumber.isNotEmpty() && mobileNumber != mUserDetails.mobile.toString()) {
+            userHashMap[Constants.MOBILE] = mobileNumber.toLong()
+        }
+
+        if (gender.isNotEmpty() && gender != mUserDetails.gender) {
+            userHashMap[Constants.GENDER] = gender
+        }
+        // userHashMap[Constants.GENDER] = gender
 
         userHashMap[Constants.COMPLETE_PROFILE] = 1
 
@@ -171,7 +225,7 @@ class UserProfileActivity : BaseActivity() {
             Toast.LENGTH_SHORT
         ).show()
 
-        startActivity(Intent(this@UserProfileActivity, MainActivity::class.java))
+        startActivity(Intent(this@UserProfileActivity, DashboardActivity::class.java))
         finish()
     }
 

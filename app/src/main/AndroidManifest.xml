@@ -12,10 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ECBuy">
         <activity
+            android:name=".ui.activities.AddProductActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.ECBuy.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
             android:name=".ui.activities.SettingsActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
+            android:theme="@style/Theme.ECBuy.NoActionBar" />
         <activity
             android:name=".ui.activities.DashboardActivity"
             android:exported="false"
@@ -25,29 +31,29 @@
             android:name=".ui.activities.UserProfileActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+            android:theme="@style/Theme.ECBuy.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.activities.ForgotPasswordActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+            android:theme="@style/Theme.ECBuy.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.activities.BaseActivity"
             android:exported="false"
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
+            android:theme="@style/Theme.ECBuy.NoActionBar" />
         <activity
             android:name=".ui.activities.RegisterActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+            android:theme="@style/Theme.ECBuy.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.activities.LoginActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+            android:theme="@style/Theme.ECBuy.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.activities.SplashActivity"

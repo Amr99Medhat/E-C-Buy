@@ -6,6 +6,7 @@ import com.amrmedhatandroid.e_cbuy.ui.activities.RegisterActivity
 import com.amrmedhatandroid.e_cbuy.ui.activities.UserProfileActivity
 import com.amrmedhatandroid.e_cbuy.utils.Constants
 import com.amrmedhatandroid.e_cbuy.models.User
+import com.amrmedhatandroid.e_cbuy.ui.activities.SettingsActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 
@@ -45,12 +46,18 @@ class FireStoreClass {
                     is LoginActivity -> {
                         activity.userLoggedInSuccessfully(user!!)
                     }
+                    is SettingsActivity -> {
+                        activity.userDetailsSuccess(user!!)
+                    }
                 }
             }
             .addOnFailureListener {
                 when (activity) {
                     is LoginActivity -> {
                         activity.userLoggedInFailed(it.message.toString())
+                    }
+                    is SettingsActivity -> {
+                        activity.userDetailsFailed(it.message.toString())
                     }
                 }
             }

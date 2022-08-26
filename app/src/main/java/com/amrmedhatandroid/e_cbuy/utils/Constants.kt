@@ -8,7 +8,6 @@ import android.webkit.MimeTypeMap
 import androidx.activity.result.ActivityResultLauncher
 
 object Constants {
-
     const val USERS: String = "users"
     const val EC_Buy_PREFERENCES: String = "EC_Buy_Prefs"
     const val LOGGED_IN_USERNAME: String = "logged_in-username"
@@ -16,6 +15,8 @@ object Constants {
     const val READ_STORAGE_PERMISSION_CODE: Int = 2
     const val MALE: String = "male"
     const val FEMALE: String = "female"
+    const val FIRST_NAME: String = "firstName"
+    const val LAST_NAME: String = "lastName"
     const val MOBILE: String = "mobile"
     const val GENDER: String = "gender"
     const val IMAGE: String = "image"

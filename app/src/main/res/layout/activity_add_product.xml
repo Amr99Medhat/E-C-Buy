@@ -4,97 +4,104 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".ui.activities.UserProfileActivity">
+    tools:context=".ui.activities.AddProductActivity">
 
-    <ImageView
-        android:id="@+id/iv_back"
-        android:layout_width="@dimen/_35ssp"
-        android:layout_height="@dimen/_35sdp"
-        android:contentDescription="@string/back_image"
-        android:foreground="?attr/selectableItemBackground"
-        android:src="@drawable/ic_back"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/tv_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_title"
-        app:tint="@color/colorPrimaryText" />
-
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:fontFamily="@font/montserrat_bold"
-        android:gravity="center"
-        android:text="@string/complete_profile"
-        android:textAllCaps="true"
-        android:textColor="@color/colorPrimaryText"
-        android:textSize="@dimen/_16ssp"
+    <FrameLayout
+        android:id="@+id/fl_header_bg"
+        android:layout_width="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/image_content_description"
+            android:scaleType="fitXY"
+            android:src="@drawable/auth_screens_background" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/title_add_product"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_15ssp" />
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/_35ssp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_gravity="center_vertical"
+            android:contentDescription="@string/back_image"
+            android:foreground="?attr/selectableItemBackground"
+            android:src="@drawable/ic_back"
+            app:tint="@color/white" />
+    </FrameLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
         android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title">
+        app:layout_constraintTop_toBottomOf="@id/fl_header_bg">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/_10sdp">
 
             <FrameLayout
-                android:id="@+id/fl_user_image"
-                android:layout_width="@dimen/_120sdp"
-                android:layout_height="@dimen/_120sdp"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:id="@+id/fl_product_image"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_200sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/iv_user_photo"
+                    android:id="@+id/iv_product_image"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="@dimen/_3sdp"
-                    android:background="@color/colorLightGray"
+                    android:background="@color/colorImageViewBackground"
                     android:contentDescription="@string/image_content_description"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_user_placeholder" />
+                    android:scaleType="fitXY" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/user_image_background" />
+                <ImageView
+                    android:id="@+id/iv_add_update_product"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|bottom"
+                    android:contentDescription="@string/image_content_description"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    android:padding="@dimen/_10sdp"
+                    android:src="@drawable/ic_add_photo" />
 
             </FrameLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_first_name"
+                android:id="@+id/til_product_title"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
-                android:background="#CCFBFBFB"
-                android:hint="@string/first_name"
+                android:hint="@string/et_hint_product_title"
                 app:hintTextColor="@color/colorSecondaryText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fl_user_image">
+                app:layout_constraintTop_toBottomOf="@id/fl_product_image">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ed_first_name"
+                    android:id="@+id/ed_product_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:enabled="false"
                     android:fontFamily="@font/montserrat_regular"
                     android:imeOptions="actionNext"
                     android:inputType="text"
@@ -104,25 +111,23 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_last_name"
+                android:id="@+id/til_product_price"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
-                android:background="#CCFBFBFB"
-                android:hint="@string/last_name"
+                android:hint="@string/et_hint_product_price"
                 app:hintTextColor="@color/colorSecondaryText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til_first_name">
+                app:layout_constraintTop_toBottomOf="@id/til_product_title">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ed_last_name"
+                    android:id="@+id/ed_product_price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:enabled="false"
                     android:fontFamily="@font/montserrat_regular"
                     android:imeOptions="actionNext"
                     android:inputType="text"
@@ -132,101 +137,58 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_email"
+                android:id="@+id/til_product_description"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
-                android:background="#CCFBFBFB"
-                android:hint="@string/email_id"
+                android:hint="@string/et_hint_product_description"
                 app:hintTextColor="@color/colorSecondaryText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til_last_name">
+                app:layout_constraintTop_toBottomOf="@id/til_product_price">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ed_email"
+                    android:id="@+id/ed_product_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:enabled="false"
                     android:fontFamily="@font/montserrat_regular"
                     android:imeOptions="actionNext"
-                    android:inputType="textEmailAddress"
+                    android:inputType="textMultiLine"
+                    android:minLines="3"
                     android:padding="@dimen/_13sdp"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_13ssp" />
             </com.google.android.material.textfield.TextInputLayout>
 
+
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_mobile_number"
+                android:id="@+id/til_product_quantity"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
-                android:hint="@string/mobile_number"
-                android:paddingTop="@dimen/_15sdp"
+                android:hint="@string/et_hint_product_quantity"
                 app:hintTextColor="@color/colorSecondaryText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til_email">
+                app:layout_constraintTop_toBottomOf="@id/til_product_description">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ed_mobile_number"
+                    android:id="@+id/ed_product_quantity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_regular"
-                    android:imeOptions="actionDone"
+                    android:imeOptions="actionNext"
                     android:inputType="number"
-                    android:maxLength="11"
                     android:padding="@dimen/_13sdp"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_13ssp" />
             </com.google.android.material.textfield.TextInputLayout>
-
-
-            <RadioGroup
-                android:id="@+id/rg_gender"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_15sdp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til_mobile_number">
-
-                <RadioButton
-                    android:id="@+id/rb_male"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="@dimen/_2sdp"
-                    android:layout_weight="1"
-                    android:background="@drawable/drawable_gender_tab_selector"
-                    android:button="@null"
-                    android:checked="true"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:gravity="center"
-                    android:text="@string/male"
-                    android:textColor="@drawable/drawable_gender_tab_text_color_selector" />
-
-                <RadioButton
-                    android:id="@+id/rb_female"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/_2sdp"
-                    android:layout_weight="1"
-                    android:background="@drawable/drawable_gender_tab_selector"
-                    android:button="@null"
-                    android:checked="false"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:gravity="center"
-                    android:text="@string/female"
-                    android:textColor="@drawable/drawable_gender_tab_text_color_selector" />
-            </RadioGroup>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_submit"
@@ -242,12 +204,15 @@
                 android:paddingTop="@dimen/_6sdp"
                 android:paddingBottom="@dimen/_6sdp"
                 android:text="@string/submit"
-                android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_15ssp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rg_gender" />
+                app:layout_constraintTop_toBottomOf="@id/til_product_quantity" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

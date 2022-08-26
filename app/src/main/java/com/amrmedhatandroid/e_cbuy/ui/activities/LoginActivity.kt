@@ -112,7 +112,7 @@ class LoginActivity : BaseActivity() {
         hideProgressDialog()
 
 
-
+        // Save user's Data in local database (SharedPrefs).
         saveBasicUserData(user)
 
         if (user.profileCompleted == 0) {

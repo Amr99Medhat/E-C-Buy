@@ -1,7 +1,7 @@
 package com.amrmedhatandroid.e_cbuy.models
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 class User(

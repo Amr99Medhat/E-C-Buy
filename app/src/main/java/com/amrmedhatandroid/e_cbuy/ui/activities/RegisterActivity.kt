@@ -164,7 +164,7 @@ class RegisterActivity : BaseActivity() {
      * A function to handle if upload the user's data to fireStore was successful.
      */
     fun registerSuccess() {
-        hideProgressDialog()
+        //hideProgressDialog()
         showErrorSnackBar(
             "You are registered successfully.",
             false
