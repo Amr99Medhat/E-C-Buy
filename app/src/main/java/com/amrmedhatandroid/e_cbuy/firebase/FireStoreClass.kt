@@ -1,12 +1,15 @@
 package com.amrmedhatandroid.e_cbuy.firebase
 
 import android.app.Activity
-import com.amrmedhatandroid.e_cbuy.ui.activities.LoginActivity
-import com.amrmedhatandroid.e_cbuy.ui.activities.RegisterActivity
-import com.amrmedhatandroid.e_cbuy.ui.activities.UserProfileActivity
+import android.app.AlertDialog
+import android.util.Log
+import androidx.fragment.app.Fragment
+import com.amrmedhatandroid.e_cbuy.models.Product
 import com.amrmedhatandroid.e_cbuy.utils.Constants
 import com.amrmedhatandroid.e_cbuy.models.User
-import com.amrmedhatandroid.e_cbuy.ui.activities.SettingsActivity
+import com.amrmedhatandroid.e_cbuy.ui.activities.*
+import com.amrmedhatandroid.e_cbuy.ui.fragments.DashboardFragment
+import com.amrmedhatandroid.e_cbuy.ui.fragments.ProductsFragment
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 
@@ -80,6 +83,79 @@ class FireStoreClass {
                         activity.updateUserProfileDataFailed(error.message.toString())
                     }
                 }
+            }
+    }
+
+    fun uploadProductDetails(activity: AddProductActivity, productInfo: Product) {
+        mFireStore.collection(Constants.PRODUCTS)
+            .document()
+            .set(productInfo, SetOptions.merge())
+            .addOnSuccessListener {
+                // Here call a function of base activity for transferring the result to it.
+                activity.productUploadSuccess()
+            }
+            .addOnFailureListener {
+                activity.productUploadFailed()
+            }
+    }
+
+    fun getProductsList(fragment: Fragment) {
+        mFireStore.collection(Constants.PRODUCTS)
+            .whereEqualTo(Constants.USER_ID, FirebaseAuthClass().getCurrentUserID())
+            .get()
+            .addOnSuccessListener { document ->
+                val productsList: ArrayList<Product> = ArrayList()
+                for (p in document.documents) {
+                    val product = p.toObject(Product::class.java)
+                    product!!.product_id = p.id
+
+                    productsList.add(product)
+                }
+
+                when (fragment) {
+                    is ProductsFragment -> {
+                        fragment.successProductsListFromFirestore(productsList)
+                    }
+                }
+            }
+            .addOnFailureListener {
+                when (fragment) {
+                    is ProductsFragment -> {
+                        fragment.failedProductsListFromFirestore()
+                    }
+                }
+            }
+    }
+
+    fun deleteProduct(fragment: ProductsFragment, productId: String) {
+        mFireStore.collection(Constants.PRODUCTS)
+            .document(productId)
+            .delete()
+            .addOnSuccessListener {
+                fragment.productDeleteSuccess()
+            }
+            .addOnFailureListener {
+                fragment.failedProductDelete()
+            }
+    }
+
+    fun getDashboardItemsList(fragment: DashboardFragment) {
+        mFireStore.collection(Constants.PRODUCTS)
+            .get()
+            .addOnSuccessListener { document ->
+                Log.d("Amr", document.documents.toString())
+                val productsList: ArrayList<Product> = ArrayList()
+
+                for (p in document.documents) {
+                    val product = p.toObject(Product::class.java)
+                    product!!.product_id = p.id
+
+                    productsList.add(product)
+                }
+                fragment.successGetDashboardItemsList(productsList)
+            }
+            .addOnFailureListener {
+                DashboardFragment().failedGetDashboardItemsList()
             }
     }
 

@@ -2,14 +2,20 @@ package com.amrmedhatandroid.e_cbuy.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.*
-import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.amrmedhatandroid.e_cbuy.R
 import com.amrmedhatandroid.e_cbuy.databinding.FragmentDashboardBinding
+import com.amrmedhatandroid.e_cbuy.firebase.FireStoreClass
+import com.amrmedhatandroid.e_cbuy.models.Product
 import com.amrmedhatandroid.e_cbuy.ui.activities.SettingsActivity
+import com.amrmedhatandroid.e_cbuy.ui.adapters.DashboardItemsListAdapter
+import com.amrmedhatandroid.e_cbuy.ui.adapters.MyProductsListAdapter
 
-class DashboardFragment : Fragment() {
+class DashboardFragment : BaseFragment() {
 
     //private lateinit var dashboardViewModel: DashboardViewModel
     private var _binding: FragmentDashboardBinding? = null
@@ -31,17 +37,37 @@ class DashboardFragment : Fragment() {
         //dashboardViewModel = ViewModelProvider(this).get(DashboardViewModel::class.java)
 
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        textView.text = "This is Dashboard Fragment"
-        return root
+        return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun getDashboardItemsList() {
+        showProgressDialog(resources.getString(R.string.please_wait))
+        FireStoreClass().getDashboardItemsList(this@DashboardFragment)
     }
+
+    fun successGetDashboardItemsList(dashboardItemsList: ArrayList<Product>) {
+        hideProgressDialog()
+
+        if (dashboardItemsList.size > 0) {
+            binding.rvDashboardItems.visibility = View.VISIBLE
+            binding.tvNoDashboardItemsFound.visibility = View.GONE
+
+            binding.rvDashboardItems.layoutManager = GridLayoutManager(activity, 2)
+            binding.rvDashboardItems.setHasFixedSize(true)
+            val adapterProducts = DashboardItemsListAdapter(requireActivity(), dashboardItemsList)
+            binding.rvDashboardItems.adapter = adapterProducts
+        } else {
+            binding.rvDashboardItems.visibility = View.GONE
+            binding.tvNoDashboardItemsFound.visibility = View.VISIBLE
+        }
+    }
+
+    fun failedGetDashboardItemsList() {
+        hideProgressDialog()
+        binding.tvNoDashboardItemsFound.visibility = View.VISIBLE
+    }
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.dashboard_menu, menu)
@@ -49,9 +75,7 @@ class DashboardFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id = item.itemId
-
-        when (id) {
+        when (item.itemId) {
             R.id.action_settings -> {
                 startActivity(Intent(activity, SettingsActivity::class.java))
                 return true
@@ -60,5 +84,15 @@ class DashboardFragment : Fragment() {
 
         return super.onOptionsItemSelected(item)
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getDashboardItemsList()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

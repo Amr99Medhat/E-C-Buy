@@ -30,9 +30,13 @@
         <entry key="..\:/Users/Amr/AndroidStudioProjects/ECBuy/app/src/main/res/menu/bottom_nav_menu.xml" value="0.37222222222222223" />
         <entry key="..\:/Users/Amr/AndroidStudioProjects/ECBuy/app/src/main/res/menu/dashboard_menu.xml" value="0.42916666666666664" />
         <entry key="..\:/Users/Amr/AndroidStudioProjects/ECBuy/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2635416666666667" />
+        <entry key="..\:/Users/Amr/Documents/GitHub/E-C-Buy/app/src/main/res/drawable/ic_delete.xml" value="0.2195" />
         <entry key="..\:/Users/Amr/Documents/GitHub/E-C-Buy/app/src/main/res/drawable/ic_vector_right.xml" value="0.207" />
+        <entry key="..\:/Users/Amr/Documents/GitHub/E-C-Buy/app/src/main/res/drawable/item_dashboard_background.xml" value="0.1335" />
         <entry key="..\:/Users/Amr/Documents/GitHub/E-C-Buy/app/src/main/res/drawable/item_gray_border_background.xml" value="0.207" />
+        <entry key="..\:/Users/Amr/Documents/GitHub/E-C-Buy/app/src/main/res/drawable/rv_item_image_background.xml" value="0.2025" />
         <entry key="..\:/Users/Amr/Documents/GitHub/E-C-Buy/app/src/main/res/layout/activity_add_product.xml" value="0.3314814814814815" />
+        <entry key="..\:/Users/Amr/Documents/GitHub/E-C-Buy/app/src/main/res/layout/activity_dashboard.xml" value="0.42916666666666664" />
         <entry key="..\:/Users/Amr/Documents/GitHub/E-C-Buy/app/src/main/res/layout/activity_forgot_password.xml" value="0.42916666666666664" />
         <entry key="..\:/Users/Amr/Documents/GitHub/E-C-Buy/app/src/main/res/layout/activity_login.xml" value="0.42916666666666664" />
         <entry key="..\:/Users/Amr/Documents/GitHub/E-C-Buy/app/src/main/res/layout/activity_main.xml" value="0.42916666666666664" />
@@ -40,8 +44,12 @@
         <entry key="..\:/Users/Amr/Documents/GitHub/E-C-Buy/app/src/main/res/layout/activity_settings.xml" value="0.34074074074074073" />
         <entry key="..\:/Users/Amr/Documents/GitHub/E-C-Buy/app/src/main/res/layout/activity_splash.xml" value="0.42916666666666664" />
         <entry key="..\:/Users/Amr/Documents/GitHub/E-C-Buy/app/src/main/res/layout/activity_user_profile.xml" value="0.42916666666666664" />
-        <entry key="..\:/Users/Amr/Documents/GitHub/E-C-Buy/app/src/main/res/layout/fragment_dashboard.xml" value="0.34074074074074073" />
-        <entry key="..\:/Users/Amr/Documents/GitHub/E-C-Buy/app/src/main/res/layout/fragment_products.xml" value="0.42916666666666664" />
+        <entry key="..\:/Users/Amr/Documents/GitHub/E-C-Buy/app/src/main/res/layout/dialog_progress.xml" value="0.42916666666666664" />
+        <entry key="..\:/Users/Amr/Documents/GitHub/E-C-Buy/app/src/main/res/layout/fragment_base.xml" value="0.42916666666666664" />
+        <entry key="..\:/Users/Amr/Documents/GitHub/E-C-Buy/app/src/main/res/layout/fragment_dashboard.xml" value="0.20462962962962963" />
+        <entry key="..\:/Users/Amr/Documents/GitHub/E-C-Buy/app/src/main/res/layout/fragment_products.xml" value="0.33240740740740743" />
+        <entry key="..\:/Users/Amr/Documents/GitHub/E-C-Buy/app/src/main/res/layout/item_dashboard_layout.xml" value="0.20854700854700856" />
+        <entry key="..\:/Users/Amr/Documents/GitHub/E-C-Buy/app/src/main/res/layout/item_list_layout.xml" value="0.33240740740740743" />
         <entry key="..\:/Users/Amr/Documents/GitHub/E-C-Buy/app/src/main/res/menu/add.xml" value="0.428125" />
         <entry key="..\:/Users/Amr/Documents/GitHub/E-C-Buy/app/src/main/res/menu/add_product_menu.xml" value="0.1" />
       </map>

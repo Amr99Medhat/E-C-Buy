@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -68,7 +69,7 @@ class UserProfileActivity : BaseActivity() {
                 if (mSelectedImageFileUri != null) {
                     FireStorageClass().uploadImageToCloudStorage(
                         this@UserProfileActivity,
-                        mSelectedImageFileUri
+                        mSelectedImageFileUri,Constants.USER_PROFILE_IMAGE
                     )
                 } else {
                     updateUserProfileDetails()
@@ -259,6 +260,9 @@ class UserProfileActivity : BaseActivity() {
                         )
                     }
                 }
+            } else if (result.resultCode == RESULT_CANCELED) {
+                // A log printed when user close or cancel the image selection.
+                Log.d("Request Cancelled", "Image Selection Cancelled")
             }
         }
 }

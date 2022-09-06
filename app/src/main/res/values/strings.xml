@@ -54,4 +54,22 @@
     <string name="et_hint_product_price">Product Price ($)</string>
     <string name="et_hint_product_description">Product Description</string>
     <string name="et_hint_product_quantity">Product Quantity</string>
+    <string name="err_msg_select_product_image">Please select product image.</string>
+    <string name="err_msg_select_product_title">Please select product title.</string>
+    <string name="err_msg_select_product_price">Please select product price.</string>
+    <string name="err_msg_select_product_description">Please select product description.</string>
+    <string name="err_msg_select_product_quantity">Please select product quantity.</string>
+    <string name="product_uploaded_success_message">Your product was uploaded successfully.</string>
+    <string name="err_msg_error_while_uploading_the_product_details">Error while uploading the product details.</string>
+    <string name="no_products_added_yet">No products added yet!</string>
+    <string name="no_dashboard_item_found">No items found!</string>
+    <string name="product_delete_success_message">Your product is deleted successfully</string>
+    <string name="delete_dialog_title">Delete</string>
+    <string name="delete_dialog_message">Are you sure you want to delete this product?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
 </resources>

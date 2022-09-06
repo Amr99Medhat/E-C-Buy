@@ -8,7 +8,10 @@ import android.webkit.MimeTypeMap
 import androidx.activity.result.ActivityResultLauncher
 
 object Constants {
+    // Collections in Cloud Firestore
     const val USERS: String = "users"
+    const val PRODUCTS: String = "products"
+
     const val EC_Buy_PREFERENCES: String = "EC_Buy_Prefs"
     const val LOGGED_IN_USERNAME: String = "logged_in-username"
     const val EXTRA_USER_DETAILS: String = "extra_user_details"
@@ -22,6 +25,9 @@ object Constants {
     const val IMAGE: String = "image"
     const val COMPLETE_PROFILE: String = "profileCompleted"
     const val USER_PROFILE_IMAGE: String = "user_profile_image"
+    const val PRODUCT_IMAGE: String = "product_image"
+    const val USER_ID: String = "user_id"
+
 
     fun pickImage(pickImage: ActivityResultLauncher<Intent>) {
         // An intent for launching the image selection of phone storage.
@@ -41,7 +47,6 @@ object Constants {
 
         return MimeTypeMap.getSingleton()
             .getExtensionFromMimeType(activity.contentResolver.getType(uri!!))
-
     }
 
 }

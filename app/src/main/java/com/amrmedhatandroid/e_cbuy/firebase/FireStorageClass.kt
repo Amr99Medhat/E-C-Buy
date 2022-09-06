@@ -3,6 +3,7 @@ package com.amrmedhatandroid.e_cbuy.firebase
 import android.app.Activity
 import android.net.Uri
 import android.util.Log
+import com.amrmedhatandroid.e_cbuy.ui.activities.AddProductActivity
 import com.amrmedhatandroid.e_cbuy.ui.activities.UserProfileActivity
 import com.amrmedhatandroid.e_cbuy.utils.Constants
 import com.google.firebase.storage.FirebaseStorage
@@ -10,9 +11,9 @@ import com.google.firebase.storage.StorageReference
 
 class FireStorageClass {
 
-    fun uploadImageToCloudStorage(activity: Activity, imageFileURI: Uri?) {
+    fun uploadImageToCloudStorage(activity: Activity, imageFileURI: Uri?, imageType: String) {
         val sRef: StorageReference = FirebaseStorage.getInstance().reference.child(
-            Constants.USER_PROFILE_IMAGE + System.currentTimeMillis() + "." + Constants.getFileExtension(
+            imageType + System.currentTimeMillis() + "." + Constants.getFileExtension(
                 activity,
                 imageFileURI
             )
@@ -30,11 +31,17 @@ class FireStorageClass {
                         is UserProfileActivity -> {
                             activity.imageUploadSuccess(uri.toString())
                         }
+                        is AddProductActivity -> {
+                            activity.imageUploadSuccess(uri.toString())
+                        }
                     }
                 }
                 .addOnFailureListener { exception ->
                     when (activity) {
                         is UserProfileActivity -> {
+                            activity.hideProgressDialog()
+                        }
+                        is AddProductActivity -> {
                             activity.hideProgressDialog()
                         }
                     }

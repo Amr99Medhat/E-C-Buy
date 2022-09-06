@@ -99,7 +99,7 @@
                 app:layout_constraintTop_toBottomOf="@id/fl_product_image">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ed_product_title"
+                    android:id="@+id/et_product_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_regular"
@@ -125,7 +125,7 @@
                 app:layout_constraintTop_toBottomOf="@id/til_product_title">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ed_product_price"
+                    android:id="@+id/et_product_price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_regular"
@@ -151,7 +151,7 @@
                 app:layout_constraintTop_toBottomOf="@id/til_product_price">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ed_product_description"
+                    android:id="@+id/et_product_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_regular"
@@ -179,11 +179,11 @@
                 app:layout_constraintTop_toBottomOf="@id/til_product_description">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ed_product_quantity"
+                    android:id="@+id/et_product_quantity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_regular"
-                    android:imeOptions="actionNext"
+                    android:imeOptions="actionDone"
                     android:inputType="number"
                     android:padding="@dimen/_13sdp"
                     android:textColor="@color/colorPrimary"
