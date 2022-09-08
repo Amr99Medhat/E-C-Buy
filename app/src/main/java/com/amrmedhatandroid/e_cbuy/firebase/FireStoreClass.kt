@@ -127,6 +127,21 @@ class FireStoreClass {
             }
     }
 
+    fun getProductDetails(activity: ProductDetailsActivity, productId: String) {
+        mFireStore.collection(Constants.PRODUCTS)
+            .document(productId)
+            .get()
+            .addOnSuccessListener { document ->
+                val product = document.toObject(Product::class.java)
+                if (product != null) {
+                    activity.getProductDetailsSuccess(product)
+                }
+            }
+            .addOnFailureListener {
+                activity.failedGetProductDetails()
+            }
+    }
+
     fun deleteProduct(fragment: ProductsFragment, productId: String) {
         mFireStore.collection(Constants.PRODUCTS)
             .document(productId)

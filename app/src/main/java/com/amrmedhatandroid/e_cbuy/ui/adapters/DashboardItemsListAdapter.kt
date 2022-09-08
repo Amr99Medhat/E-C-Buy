@@ -13,6 +13,8 @@ class DashboardItemsListAdapter(
     private val mProducts: ArrayList<Product>
 ) : RecyclerView.Adapter<DashboardItemsListAdapter.AllProductsViewHolder>() {
 
+    private var onClickListener: OnClickListener? = null
+
     inner class AllProductsViewHolder(var itemDashboardLayoutBinding: ItemDashboardLayoutBinding) :
         RecyclerView.ViewHolder(itemDashboardLayoutBinding.root) {
         fun setLabData(product: Product) {
@@ -22,9 +24,6 @@ class DashboardItemsListAdapter(
             )
             itemDashboardLayoutBinding.tvDashboardItemTitle.text = product.title
             itemDashboardLayoutBinding.tvDashboardItemPrice.text = "$${product.price}"
-//            itemContainerPatientBinding.root.setOnClickListener {
-//                mPatientListener.onPatientClicked(Patient)
-//            }
         }
     }
 
@@ -36,10 +35,23 @@ class DashboardItemsListAdapter(
 
     override fun onBindViewHolder(holder: AllProductsViewHolder, position: Int) {
         holder.setLabData(mProducts[position])
+        holder.itemView.setOnClickListener {
+            if (onClickListener != null) {
+                onClickListener!!.onClick(position, mProducts[position])
+            }
+        }
     }
 
     override fun getItemCount(): Int {
         return mProducts.size
+    }
+
+    interface OnClickListener {
+        fun onClick(position: Int, product: Product)
+    }
+
+    fun setOnClickListener(onClickListener: OnClickListener) {
+        this.onClickListener = onClickListener
     }
 
 

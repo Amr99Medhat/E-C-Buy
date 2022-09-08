@@ -27,6 +27,7 @@ object Constants {
     const val USER_PROFILE_IMAGE: String = "user_profile_image"
     const val PRODUCT_IMAGE: String = "product_image"
     const val USER_ID: String = "user_id"
+    const val EXTRA_PRODUCT_ID: String = "extra_product_id"
 
 
     fun pickImage(pickImage: ActivityResultLauncher<Intent>) {

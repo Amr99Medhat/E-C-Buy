@@ -5,7 +5,12 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/_3sdp"
     android:background="@drawable/item_dashboard_background"
-    android:padding="@dimen/_1sdp">
+    android:clickable="true"
+    android:clipToPadding="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:padding="@dimen/_1sdp"
+    app:cardBackgroundColor="@android:color/transparent">
 
     <ImageView
         android:id="@+id/iv_dashboard_item_image"

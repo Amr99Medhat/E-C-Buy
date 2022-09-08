@@ -1,6 +1,7 @@
 package com.amrmedhatandroid.e_cbuy.ui.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.amrmedhatandroid.e_cbuy.R
 import com.amrmedhatandroid.e_cbuy.databinding.ItemListLayoutBinding
 import com.amrmedhatandroid.e_cbuy.models.Product
+import com.amrmedhatandroid.e_cbuy.ui.activities.ProductDetailsActivity
 import com.amrmedhatandroid.e_cbuy.ui.fragments.ProductsFragment
+import com.amrmedhatandroid.e_cbuy.utils.Constants
 import com.amrmedhatandroid.e_cbuy.utils.GlideLoader
 
 open class MyProductsListAdapter(
@@ -29,9 +32,11 @@ open class MyProductsListAdapter(
             itemContainerPatientBinding.ibDeleteProduct.setOnClickListener {
                 fragment.deleteProduct(product.product_id)
             }
-//            itemContainerPatientBinding.root.setOnClickListener {
-//                mPatientListener.onPatientClicked(Patient)
-//            }
+            itemContainerPatientBinding.root.setOnClickListener {
+                val intent = Intent(context,ProductDetailsActivity::class.java)
+                intent.putExtra(Constants.EXTRA_PRODUCT_ID,product.product_id)
+                context.startActivity(intent)
+            }
         }
     }
 
@@ -48,6 +53,4 @@ open class MyProductsListAdapter(
     override fun getItemCount(): Int {
         return mProducts.size
     }
-
-
 }

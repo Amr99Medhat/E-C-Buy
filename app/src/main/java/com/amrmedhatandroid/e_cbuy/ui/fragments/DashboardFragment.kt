@@ -2,18 +2,16 @@ package com.amrmedhatandroid.e_cbuy.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.amrmedhatandroid.e_cbuy.R
 import com.amrmedhatandroid.e_cbuy.databinding.FragmentDashboardBinding
 import com.amrmedhatandroid.e_cbuy.firebase.FireStoreClass
 import com.amrmedhatandroid.e_cbuy.models.Product
+import com.amrmedhatandroid.e_cbuy.ui.activities.ProductDetailsActivity
 import com.amrmedhatandroid.e_cbuy.ui.activities.SettingsActivity
 import com.amrmedhatandroid.e_cbuy.ui.adapters.DashboardItemsListAdapter
-import com.amrmedhatandroid.e_cbuy.ui.adapters.MyProductsListAdapter
+import com.amrmedhatandroid.e_cbuy.utils.Constants
 
 class DashboardFragment : BaseFragment() {
 
@@ -57,6 +55,15 @@ class DashboardFragment : BaseFragment() {
             binding.rvDashboardItems.setHasFixedSize(true)
             val adapterProducts = DashboardItemsListAdapter(requireActivity(), dashboardItemsList)
             binding.rvDashboardItems.adapter = adapterProducts
+
+
+            adapterProducts.setOnClickListener(object : DashboardItemsListAdapter.OnClickListener {
+                override fun onClick(position: Int, product: Product) {
+                    val intent = Intent(context, ProductDetailsActivity::class.java)
+                    intent.putExtra(Constants.EXTRA_PRODUCT_ID, product.product_id)
+                    startActivity(intent)
+                }
+            })
         } else {
             binding.rvDashboardItems.visibility = View.GONE
             binding.tvNoDashboardItemsFound.visibility = View.VISIBLE
