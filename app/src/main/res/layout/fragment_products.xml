@@ -28,7 +28,7 @@
         android:visibility="gone"
         android:text="@string/no_products_added_yet"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="@dimen/_20ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

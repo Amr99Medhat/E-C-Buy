@@ -25,16 +25,17 @@ open class MyProductsListAdapter(
         fun setLabData(product: Product) {
             GlideLoader(context).loadProductImage(
                 product.image,
-                itemContainerPatientBinding.ivItemImage
+                itemContainerPatientBinding.ivCartItemImage
             )
-            itemContainerPatientBinding.tvItemName.text = product.title
-            itemContainerPatientBinding.tvItemPrice.text = "$${product.price}"
-            itemContainerPatientBinding.ibDeleteProduct.setOnClickListener {
+            itemContainerPatientBinding.tvCartItemTitle.text = product.title
+            itemContainerPatientBinding.tvCartItemPrice.text = "$${product.price}"
+            itemContainerPatientBinding.ibDeleteCartItem.setOnClickListener {
                 fragment.deleteProduct(product.product_id)
             }
             itemContainerPatientBinding.root.setOnClickListener {
-                val intent = Intent(context,ProductDetailsActivity::class.java)
-                intent.putExtra(Constants.EXTRA_PRODUCT_ID,product.product_id)
+                val intent = Intent(context, ProductDetailsActivity::class.java)
+                intent.putExtra(Constants.EXTRA_PRODUCT_ID, product.product_id)
+                intent.putExtra(Constants.EXTRA_PRODUCT_OWNER_ID, product.user_id)
                 context.startActivity(intent)
             }
         }

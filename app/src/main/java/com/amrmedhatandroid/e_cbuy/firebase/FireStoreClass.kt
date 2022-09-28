@@ -2,8 +2,10 @@ package com.amrmedhatandroid.e_cbuy.firebase
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.util.Log
 import androidx.fragment.app.Fragment
+import com.amrmedhatandroid.e_cbuy.models.CartItem
 import com.amrmedhatandroid.e_cbuy.models.Product
 import com.amrmedhatandroid.e_cbuy.utils.Constants
 import com.amrmedhatandroid.e_cbuy.models.User
@@ -142,6 +144,18 @@ class FireStoreClass {
             }
     }
 
+    fun addCartItems(activity: ProductDetailsActivity, addToCart: CartItem) {
+        mFireStore.collection(Constants.CART_ITEMS)
+            .document()
+            .set(addToCart, SetOptions.merge())
+            .addOnSuccessListener {
+                activity.addToCartSuccess()
+            }
+            .addOnFailureListener {
+                activity.failedAddToCart()
+            }
+    }
+
     fun deleteProduct(fragment: ProductsFragment, productId: String) {
         mFireStore.collection(Constants.PRODUCTS)
             .document(productId)
@@ -151,6 +165,68 @@ class FireStoreClass {
             }
             .addOnFailureListener {
                 fragment.failedProductDelete()
+            }
+    }
+
+    fun getCartList(activity: Activity) {
+        mFireStore.collection(Constants.CART_ITEMS)
+            .whereEqualTo(Constants.USER_ID, FirebaseAuthClass().getCurrentUserID())
+            .get()
+            .addOnSuccessListener { document ->
+                val list: ArrayList<CartItem> = ArrayList()
+                for (i in document.documents) {
+                    val cartItem = i.toObject(CartItem::class.java)!!
+                    cartItem.id = i.id
+                    list.add(cartItem)
+                }
+
+                when (activity) {
+                    is CartListActivity -> {
+                        activity.successCartItemsList(list)
+                    }
+                }
+
+            }
+            .addOnFailureListener {
+                when (activity) {
+                    is CartListActivity -> {
+                        activity.failedCartItemsList()
+                    }
+                }
+            }
+    }
+
+    fun checkIfItemExistInCart(activity: ProductDetailsActivity, productId: String) {
+        mFireStore.collection(Constants.CART_ITEMS)
+            .whereEqualTo(Constants.USER_ID, FirebaseAuthClass().getCurrentUserID())
+            .whereEqualTo(Constants.PRODUCT_ID, productId)
+            .get()
+            .addOnSuccessListener { document ->
+                if (document.documents.size > 0) {
+                    activity.productExistInCart()
+                } else {
+                    activity.failedCheckIfItemExistInCart()
+                }
+            }
+            .addOnFailureListener {
+                activity.failedCheckIfItemExistInCart()
+            }
+    }
+
+    fun getAllProductsList(activity: CartListActivity) {
+        mFireStore.collection(Constants.PRODUCTS)
+            .get()
+            .addOnSuccessListener { document ->
+                val productsList: ArrayList<Product> = ArrayList()
+                for (p in document.documents) {
+                    val product = p.toObject(Product::class.java)
+                    product!!.product_id = p.id
+                    productsList.add(product)
+                }
+                activity.successProductsListFromFireStore(productsList)
+            }
+            .addOnFailureListener {
+                activity.failedGetAllProductsList()
             }
     }
 
@@ -173,5 +249,47 @@ class FireStoreClass {
                 DashboardFragment().failedGetDashboardItemsList()
             }
     }
+
+    fun removeItemFromCart(context: Context, cartId: String) {
+        mFireStore.collection(Constants.CART_ITEMS)
+            .document(cartId)
+            .delete()
+            .addOnSuccessListener {
+                when (context) {
+                    is CartListActivity -> {
+                        context.itemRemovedSuccess()
+                    }
+                }
+            }
+            .addOnFailureListener {
+                when (context) {
+                    is CartListActivity -> {
+                        context.failedRemoveItemFromCart()
+                    }
+                }
+            }
+    }
+
+    fun updateMyCart(context: Context, cartId: String, itemHashMap: HashMap<String, Any>) {
+        mFireStore.collection(Constants.CART_ITEMS)
+            .document(cartId)
+            .update(itemHashMap)
+            .addOnSuccessListener {
+                when (context) {
+                    is CartListActivity -> {
+                        context.itemUpdateSuccess()
+                    }
+                }
+            }
+            .addOnFailureListener {
+                when (context) {
+                    is CartListActivity -> {
+                        context.failedUpdateMyCart()
+                    }
+                }
+            }
+
+    }
+
 
 }

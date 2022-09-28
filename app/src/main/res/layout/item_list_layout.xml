@@ -14,7 +14,7 @@
     app:cardBackgroundColor="@android:color/transparent">
 
     <LinearLayout
-        android:id="@+id/ll_item_image"
+        android:id="@+id/ll_cart_item_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/rv_item_image_background"
@@ -24,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/iv_item_image"
+            android:id="@+id/iv_cart_item_image"
             android:layout_width="@dimen/_70sdp"
             android:layout_height="@dimen/_60sdp"
             android:contentDescription="@string/image_content_description"
@@ -32,7 +32,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/ll_product_details"
+        android:id="@+id/ll_cart_item_details"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8sdp"
@@ -40,12 +40,12 @@
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/ib_delete_product"
-        app:layout_constraintStart_toEndOf="@id/ll_item_image"
+        app:layout_constraintEnd_toStartOf="@id/ib_delete_cart_item"
+        app:layout_constraintStart_toEndOf="@id/ll_cart_item_image"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tv_item_name"
+            android:id="@+id/tv_cart_item_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_bold"
@@ -53,7 +53,7 @@
             android:textSize="@dimen/_12ssp" />
 
         <TextView
-            android:id="@+id/tv_item_price"
+            android:id="@+id/tv_cart_item_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_2sdp"
@@ -64,7 +64,7 @@
     </LinearLayout>
 
     <ImageButton
-        android:id="@+id/ib_delete_product"
+        android:id="@+id/ib_delete_cart_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
@@ -73,6 +73,6 @@
         android:padding="@dimen/_3sdp"
         android:src="@drawable/ic_delete"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/ll_product_details"
+        app:layout_constraintStart_toEndOf="@id/ll_cart_item_details"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -28,6 +28,11 @@ object Constants {
     const val PRODUCT_IMAGE: String = "product_image"
     const val USER_ID: String = "user_id"
     const val EXTRA_PRODUCT_ID: String = "extra_product_id"
+    const val EXTRA_PRODUCT_OWNER_ID: String = "extra_product_owner_id"
+    const val DEFAULT_CART_QUANTITY: String = "1"
+    const val CART_ITEMS: String = "cart_items"
+    const val PRODUCT_ID: String = "product_id"
+    const val CART_QUANTITY: String = "cart_quantity"
 
 
     fun pickImage(pickImage: ActivityResultLauncher<Intent>) {

@@ -8,6 +8,7 @@ import com.amrmedhatandroid.e_cbuy.R
 import com.amrmedhatandroid.e_cbuy.databinding.FragmentDashboardBinding
 import com.amrmedhatandroid.e_cbuy.firebase.FireStoreClass
 import com.amrmedhatandroid.e_cbuy.models.Product
+import com.amrmedhatandroid.e_cbuy.ui.activities.CartListActivity
 import com.amrmedhatandroid.e_cbuy.ui.activities.ProductDetailsActivity
 import com.amrmedhatandroid.e_cbuy.ui.activities.SettingsActivity
 import com.amrmedhatandroid.e_cbuy.ui.adapters.DashboardItemsListAdapter
@@ -61,6 +62,7 @@ class DashboardFragment : BaseFragment() {
                 override fun onClick(position: Int, product: Product) {
                     val intent = Intent(context, ProductDetailsActivity::class.java)
                     intent.putExtra(Constants.EXTRA_PRODUCT_ID, product.product_id)
+                    intent.putExtra(Constants.EXTRA_PRODUCT_OWNER_ID, product.user_id)
                     startActivity(intent)
                 }
             })
@@ -87,10 +89,12 @@ class DashboardFragment : BaseFragment() {
                 startActivity(Intent(activity, SettingsActivity::class.java))
                 return true
             }
+            R.id.action_cart -> {
+                startActivity(Intent(activity, CartListActivity::class.java))
+                return true
+            }
         }
-
         return super.onOptionsItemSelected(item)
-
     }
 
     override fun onResume() {
