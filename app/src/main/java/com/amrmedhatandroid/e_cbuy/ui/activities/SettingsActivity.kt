@@ -43,6 +43,9 @@ class SettingsActivity : BaseActivity() {
             intent.putExtra(Constants.EXTRA_USER_DETAILS, mUserDetails)
             startActivity(intent)
         }
+        mActivitySettingsBinding.llAddress.setOnClickListener {
+            startActivity(Intent(this@SettingsActivity, AddressListActivity::class.java))
+        }
     }
 
     private fun getUserDetails() {

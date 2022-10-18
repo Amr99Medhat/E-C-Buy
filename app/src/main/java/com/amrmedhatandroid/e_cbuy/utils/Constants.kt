@@ -8,9 +8,11 @@ import android.webkit.MimeTypeMap
 import androidx.activity.result.ActivityResultLauncher
 
 object Constants {
-    // Collections in Cloud Firestore
+    // Collections names in Cloud FireStore.
     const val USERS: String = "users"
     const val PRODUCTS: String = "products"
+    const val CART_ITEMS: String = "cart_items"
+    const val ADDRESSES: String = "addresses"
 
     const val EC_Buy_PREFERENCES: String = "EC_Buy_Prefs"
     const val LOGGED_IN_USERNAME: String = "logged_in-username"
@@ -30,9 +32,11 @@ object Constants {
     const val EXTRA_PRODUCT_ID: String = "extra_product_id"
     const val EXTRA_PRODUCT_OWNER_ID: String = "extra_product_owner_id"
     const val DEFAULT_CART_QUANTITY: String = "1"
-    const val CART_ITEMS: String = "cart_items"
     const val PRODUCT_ID: String = "product_id"
     const val CART_QUANTITY: String = "cart_quantity"
+    const val HOME: String = "Home"
+    const val OFFICE: String = "Office"
+    const val OTHER: String = "other"
 
 
     fun pickImage(pickImage: ActivityResultLauncher<Intent>) {

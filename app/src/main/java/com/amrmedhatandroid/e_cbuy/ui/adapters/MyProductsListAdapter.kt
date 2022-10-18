@@ -39,6 +39,7 @@ open class MyProductsListAdapter(
                 context.startActivity(intent)
             }
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyProductsViewHolder {
@@ -49,6 +50,7 @@ open class MyProductsListAdapter(
 
     override fun onBindViewHolder(holder: MyProductsViewHolder, position: Int) {
         holder.setLabData(mProducts[position])
+
     }
 
     override fun getItemCount(): Int {

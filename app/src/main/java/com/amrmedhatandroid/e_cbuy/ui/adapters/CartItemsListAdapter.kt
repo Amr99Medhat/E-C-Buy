@@ -65,14 +65,6 @@ class CartItemsListAdapter(
             }
 
             itemCartListBinding.ibRemoveCartItem.setOnClickListener {
-//                when (context) {
-//                    is CartListActivity -> {
-//                        context.showProgressDialog(context.resources.getString(R.string.please_wait))
-//                        context.failedRemoveItemFromCart()
-//                    }
-//                }
-//                FireStoreClass().removeItemFromCart(context, item.id)
-
                 if (item.cart_quantity == "1") {
                     FireStoreClass().removeItemFromCart(context, item.id)
                 } else {
@@ -89,13 +81,6 @@ class CartItemsListAdapter(
             }
 
             itemCartListBinding.ibAddCartItem.setOnClickListener {
-//                when (context) {
-//                    is CartListActivity -> {
-//                        context.showProgressDialog(context.resources.getString(R.string.please_wait))
-//                        context.failedRemoveItemFromCart()
-//                    }
-//                }
-//                FireStoreClass().removeItemFromCart(context, item.id)
                 val cartQuantity: Int = item.cart_quantity.toInt()
                 if (cartQuantity < item.stock_quantity.toInt()) {
                     val itemHashMap = HashMap<String, Any>()

@@ -84,6 +84,25 @@
     <string name="lbl_out_of_stock">OUT OF STOCK</string>
     <string name="msg_item_removed_successfully">Item removed successfully.</string>
     <string name="msg_for_available_stock">Available stock is %1$s!. You can not add more than stock quantity.</string>
+    <string name="title_address_list">ADDRESS LIST</string>
+    <string name="no_address_found">No Address Found!</string>
+    <string name="lbl_add_address">Add Address</string>
+    <string name="title_add_address">ADD ADDRESS</string>
+    <string name="hint_full_name">Full name</string>
+    <string name="hint_phone_name">Phone number</string>
+    <string name="hint_address">Address</string>
+    <string name="hint_zip_code">ZipCode</string>
+    <string name="hint_additional_note">Additional note</string>
+    <string name="hint_other_details">Other note</string>
+    <string name="lbl_home">HOME</string>
+    <string name="lbl_office">OFFICE</string>
+    <string name="lbl_other">OTHER</string>
+    <string name="err_msg_please_enter_full_name">Please enter full name.</string>
+    <string name="err_msg_please_enter_phone_number">Please enter phone number.</string>
+    <string name="err_msg_please_enter_address">Please enter address.</string>
+    <string name="err_msg_please_zip_code">Please enter zip-code.</string>
+    <string name="err_msg_please_other_details">Please enter other details.</string>
+    <string name="your_address_was_added_successfully">Your address was added successfully.</string>
 
     <!--    In (fragment_base)-->
     <string name="hello_blank_fragment">Hello blank fragment</string>

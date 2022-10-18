@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.util.Log
 import androidx.fragment.app.Fragment
+import com.amrmedhatandroid.e_cbuy.models.Address
 import com.amrmedhatandroid.e_cbuy.models.CartItem
 import com.amrmedhatandroid.e_cbuy.models.Product
 import com.amrmedhatandroid.e_cbuy.utils.Constants
@@ -288,8 +289,35 @@ class FireStoreClass {
                     }
                 }
             }
-
     }
 
+    fun getAddressesList(activity: AddressListActivity) {
+        mFireStore.collection(Constants.ADDRESSES)
+            .whereEqualTo(Constants.USER_ID, FirebaseAuthClass().getCurrentUserID())
+            .get()
+            .addOnSuccessListener { document ->
+                val addressList: ArrayList<Address> = ArrayList()
+
+                for (a in document.documents) {
+                    val address = a.toObject(Address::class.java)!!
+                    address.id = a.id
+                    addressList.add(address)
+                }
+                activity.successAddressListFormFireStore(addressList)
+            }.addOnFailureListener {
+                activity.failedUpdateMyCart()
+            }
+    }
+
+    fun addAddress(activity: AddEditAddressActivity, addressInfo: Address) {
+        mFireStore.collection(Constants.ADDRESSES)
+            .document()
+            .set(addressInfo, SetOptions.merge())
+            .addOnSuccessListener {
+                activity.addUpdateAddressSuccess()
+            }.addOnFailureListener {
+                activity.failedAddAddress()
+            }
+    }
 
 }
