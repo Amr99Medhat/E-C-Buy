@@ -37,6 +37,7 @@ object Constants {
     const val HOME: String = "Home"
     const val OFFICE: String = "Office"
     const val OTHER: String = "other"
+    const val EXTRA_ADDRESS_DETAILS: String = "AddressDetails"
 
 
     fun pickImage(pickImage: ActivityResultLauncher<Intent>) {

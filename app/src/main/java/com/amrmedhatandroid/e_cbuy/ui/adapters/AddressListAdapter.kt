@@ -1,14 +1,18 @@
 package com.amrmedhatandroid.e_cbuy.ui.adapters
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.amrmedhatandroid.e_cbuy.databinding.ItemAddressLayoutBinding
 import com.amrmedhatandroid.e_cbuy.models.Address
+import com.amrmedhatandroid.e_cbuy.ui.activities.AddEditAddressActivity
+import com.amrmedhatandroid.e_cbuy.utils.Constants
 
 class AddressListAdapter(
-//    private val context: Context,
+    private val context: Context,
     private val list: ArrayList<Address>
 ) : RecyclerView.Adapter<AddressListAdapter.AddressItemsListHolder>() {
 
@@ -21,6 +25,13 @@ class AddressListAdapter(
                 "${address.address}, ${address.zipCode}"
             itemAddressLayoutBinding.tvAddressMobileNumber.text = address.mobileNumber
         }
+    }
+
+    fun notifyEditItem(activity: Activity, position: Int) {
+        val intent = Intent(context, AddEditAddressActivity::class.java)
+        intent.putExtra(Constants.EXTRA_ADDRESS_DETAILS, list[position])
+        activity.startActivity(intent)
+        notifyItemChanged(position)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddressItemsListHolder {

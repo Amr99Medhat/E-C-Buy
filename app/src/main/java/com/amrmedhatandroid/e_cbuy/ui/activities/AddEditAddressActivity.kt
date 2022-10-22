@@ -13,12 +13,47 @@ import com.amrmedhatandroid.e_cbuy.utils.Constants
 
 class AddEditAddressActivity : BaseActivity() {
     private lateinit var mActivityAddEditAddressBinding: ActivityAddEditAddressBinding
+    private var mAddressDetails: Address? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mActivityAddEditAddressBinding = ActivityAddEditAddressBinding.inflate(layoutInflater)
         setContentView(mActivityAddEditAddressBinding.root)
-        setListeners()
 
+        if (intent.hasExtra(Constants.EXTRA_ADDRESS_DETAILS)) {
+            mAddressDetails = intent.getParcelableExtra(Constants.EXTRA_ADDRESS_DETAILS)
+        }
+
+        if (mAddressDetails != null) {
+            if (mAddressDetails!!.id.isNotEmpty()) {
+                mActivityAddEditAddressBinding.tvTitle.text =
+                    resources.getString(R.string.title_edit_address)
+                mActivityAddEditAddressBinding.btnSubmit.text =
+                    resources.getString(R.string.btn_lbl_update)
+
+                mActivityAddEditAddressBinding.etFullName.setText(mAddressDetails?.name)
+                mActivityAddEditAddressBinding.etPhoneNumber.setText(mAddressDetails?.mobileNumber)
+                mActivityAddEditAddressBinding.etAddress.setText(mAddressDetails?.address)
+                mActivityAddEditAddressBinding.etZipCode.setText(mAddressDetails?.zipCode)
+                mActivityAddEditAddressBinding.etAdditionalNote.setText(mAddressDetails?.additionalNote)
+
+
+                when (mAddressDetails?.type) {
+                    Constants.HOME -> {
+                        mActivityAddEditAddressBinding.rbHome.isChecked = true
+                    }
+                    Constants.OFFICE -> {
+                        mActivityAddEditAddressBinding.rbOffice.isChecked = true
+                    }
+                    else -> {
+                        mActivityAddEditAddressBinding.rbOther.isChecked = true
+                        mActivityAddEditAddressBinding.tilOtherDetails.visibility = View.VISIBLE
+                        mActivityAddEditAddressBinding.etOtherDetails.setText(mAddressDetails?.otherDetails)
+                    }
+                }
+            }
+        }
+
+        setListeners()
     }
 
     /**
@@ -60,28 +95,43 @@ class AddEditAddressActivity : BaseActivity() {
                     Constants.OTHER
                 }
             }
-            val addressModel = Address(
-                FirebaseAuthClass().getCurrentUserID(),
+            val addressModel = Address(FirebaseAuthClass().getCurrentUserID(),
                 mActivityAddEditAddressBinding.etFullName.text.toString().trim { it <= ' ' },
                 mActivityAddEditAddressBinding.etPhoneNumber.text.toString().trim { it <= ' ' },
                 mActivityAddEditAddressBinding.etAddress.text.toString().trim { it <= ' ' },
                 mActivityAddEditAddressBinding.etZipCode.text.toString().trim { it <= ' ' },
                 mActivityAddEditAddressBinding.etAdditionalNote.text.toString().trim { it <= ' ' },
                 addressType,
-                mActivityAddEditAddressBinding.etOtherDetails.text.toString().trim { it <= ' ' }
-            )
-            FireStoreClass().addAddress(this, addressModel)
+                mActivityAddEditAddressBinding.etOtherDetails.text.toString().trim { it <= ' ' })
+
+            if (mAddressDetails != null && mAddressDetails!!.id.isNotEmpty()) {
+                FireStoreClass().updateAddress(
+                    this@AddEditAddressActivity,
+                    addressModel,
+                    mAddressDetails!!.id
+                )
+            } else {
+                FireStoreClass().addAddress(this, addressModel)
+            }
         }
     }
 
     fun addUpdateAddressSuccess() {
         hideProgressDialog()
 
+        val notifySuccessMessage: String =
+            if (mAddressDetails != null && mAddressDetails!!.id.isNotEmpty()) {
+                resources.getString(R.string.msg_your_address_updated_successfully)
+            } else {
+                resources.getString(R.string.your_address_was_added_successfully)
+            }
+
         Toast.makeText(
             this@AddEditAddressActivity,
-            resources.getString(R.string.your_address_was_added_successfully),
+            notifySuccessMessage,
             Toast.LENGTH_SHORT
         ).show()
+
         finish()
     }
 
@@ -91,38 +141,31 @@ class AddEditAddressActivity : BaseActivity() {
 
     private fun validateAddressDetails(): Boolean {
         return when {
-            TextUtils.isEmpty(
-                mActivityAddEditAddressBinding.etFullName.text.toString().trim { it <= ' ' }) -> {
+            TextUtils.isEmpty(mActivityAddEditAddressBinding.etFullName.text.toString()
+                .trim { it <= ' ' }) -> {
                 showErrorSnackBar(
-                    resources.getString(R.string.err_msg_please_enter_full_name),
-                    true
+                    resources.getString(R.string.err_msg_please_enter_full_name), true
                 )
                 false
             }
-            TextUtils.isEmpty(
-                mActivityAddEditAddressBinding.etPhoneNumber.text.toString()
-                    .trim { it <= ' ' }) -> {
+            TextUtils.isEmpty(mActivityAddEditAddressBinding.etPhoneNumber.text.toString()
+                .trim { it <= ' ' }) -> {
                 showErrorSnackBar(
-                    resources.getString(R.string.err_msg_please_enter_phone_number),
-                    true
+                    resources.getString(R.string.err_msg_please_enter_phone_number), true
                 )
                 false
             }
-            TextUtils.isEmpty(
-                mActivityAddEditAddressBinding.etAddress.text.toString()
-                    .trim { it <= ' ' }) -> {
+            TextUtils.isEmpty(mActivityAddEditAddressBinding.etAddress.text.toString()
+                .trim { it <= ' ' }) -> {
                 showErrorSnackBar(
-                    resources.getString(R.string.err_msg_please_enter_address),
-                    true
+                    resources.getString(R.string.err_msg_please_enter_address), true
                 )
                 false
             }
-            TextUtils.isEmpty(
-                mActivityAddEditAddressBinding.etZipCode.text.toString()
-                    .trim { it <= ' ' }) -> {
+            TextUtils.isEmpty(mActivityAddEditAddressBinding.etZipCode.text.toString()
+                .trim { it <= ' ' }) -> {
                 showErrorSnackBar(
-                    resources.getString(R.string.err_msg_please_zip_code),
-                    true
+                    resources.getString(R.string.err_msg_please_zip_code), true
                 )
                 false
             }
@@ -130,8 +173,7 @@ class AddEditAddressActivity : BaseActivity() {
                 mActivityAddEditAddressBinding.etOtherDetails.text.toString()
                     .trim { it <= ' ' }) -> {
                 showErrorSnackBar(
-                    resources.getString(R.string.err_msg_please_other_details),
-                    true
+                    resources.getString(R.string.err_msg_please_other_details), true
                 )
                 false
             }

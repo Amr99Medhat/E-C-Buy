@@ -103,6 +103,9 @@
     <string name="err_msg_please_zip_code">Please enter zip-code.</string>
     <string name="err_msg_please_other_details">Please enter other details.</string>
     <string name="your_address_was_added_successfully">Your address was added successfully.</string>
+    <string name="title_edit_address">EDIT ADDRESS</string>
+    <string name="btn_lbl_update">UPDATE</string>
+    <string name="msg_your_address_updated_successfully">Your address was updated successfully.</string>
 
     <!--    In (fragment_base)-->
     <string name="hello_blank_fragment">Hello blank fragment</string>
