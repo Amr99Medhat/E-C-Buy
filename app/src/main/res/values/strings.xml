@@ -106,6 +106,18 @@
     <string name="title_edit_address">EDIT ADDRESS</string>
     <string name="btn_lbl_update">UPDATE</string>
     <string name="msg_your_address_updated_successfully">Your address was updated successfully.</string>
+    <string name="err_your_address_deleted_successfully">Your address was deleted successfully.</string>
+    <string name="title_select_address">SELECT ADDRESS</string>
+    <string name="title_checkout">CHECKOUT</string>
+    <string name="checkout_lbl_product_items">Product Items</string>
+    <string name="checkout_lbl_selected_address">Select Address</string>
+    <string name="checkout_lbl_items_receipt">Items Receipt</string>
+    <string name="lbl_Payment_mode">Payment Mode</string>
+    <string name="lbl_cash_or_delivery">Cash or Delivery</string>
+    <string name="btn_lbl_place_order">PLACE ORDER</string>
+    <string name="lbl_cash_on_delivery">Cash On Delivery</string>
+    <string name="lbl_payment_mode">Payment Mode</string>
+
 
     <!--    In (fragment_base)-->
     <string name="hello_blank_fragment">Hello blank fragment</string>

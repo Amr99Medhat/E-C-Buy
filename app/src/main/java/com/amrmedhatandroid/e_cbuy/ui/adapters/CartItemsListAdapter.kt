@@ -16,7 +16,8 @@ import com.amrmedhatandroid.e_cbuy.utils.GlideLoader
 
 class CartItemsListAdapter(
     private val context: Context,
-    private val list: ArrayList<CartItem>
+    private val list: ArrayList<CartItem>,
+    private val updateCartItems: Boolean
 ) : RecyclerView.Adapter<CartItemsListAdapter.CartItemsListHolder>() {
 
 
@@ -31,9 +32,17 @@ class CartItemsListAdapter(
             itemCartListBinding.tvCartItemPrice.text = "$${item.price}"
             itemCartListBinding.tvCartQuantity.text = item.cart_quantity
 
+
+
             if (item.cart_quantity == "0") {
                 itemCartListBinding.ibRemoveCartItem.visibility = View.GONE
                 itemCartListBinding.ibAddCartItem.visibility = View.GONE
+
+                if (updateCartItems) {
+                    itemCartListBinding.ibDeleteCartItem.visibility = View.VISIBLE
+                } else {
+                    itemCartListBinding.ibDeleteCartItem.visibility = View.GONE
+                }
                 itemCartListBinding.tvCartQuantity.text =
                     context.resources.getString(R.string.lbl_out_of_stock)
 
@@ -44,8 +53,17 @@ class CartItemsListAdapter(
                     )
                 )
             } else {
-                itemCartListBinding.ibRemoveCartItem.visibility = View.VISIBLE
-                itemCartListBinding.ibAddCartItem.visibility = View.VISIBLE
+                if (updateCartItems){
+                    itemCartListBinding.ibRemoveCartItem.visibility = View.VISIBLE
+                    itemCartListBinding.ibAddCartItem.visibility = View.VISIBLE
+                    itemCartListBinding.ibDeleteCartItem.visibility = View.VISIBLE
+
+                }else{
+                    itemCartListBinding.ibRemoveCartItem.visibility = View.GONE
+                    itemCartListBinding.ibAddCartItem.visibility = View.GONE
+                    itemCartListBinding.ibDeleteCartItem.visibility = View.GONE
+                }
+
 
                 itemCartListBinding.tvCartQuantity.setTextColor(
                     ContextCompat.getColor(

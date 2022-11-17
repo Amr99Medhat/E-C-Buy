@@ -22,6 +22,7 @@
             android:src="@drawable/auth_screens_background" />
 
         <TextView
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

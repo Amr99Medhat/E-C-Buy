@@ -1,5 +1,6 @@
 package com.amrmedhatandroid.e_cbuy.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -10,6 +11,7 @@ import com.amrmedhatandroid.e_cbuy.firebase.FireStoreClass
 import com.amrmedhatandroid.e_cbuy.models.CartItem
 import com.amrmedhatandroid.e_cbuy.models.Product
 import com.amrmedhatandroid.e_cbuy.ui.adapters.CartItemsListAdapter
+import com.amrmedhatandroid.e_cbuy.utils.Constants
 
 class CartListActivity : BaseActivity() {
     private lateinit var mActivityCartListBinding: ActivityCartListBinding
@@ -29,6 +31,11 @@ class CartListActivity : BaseActivity() {
         mActivityCartListBinding.ivBack.setOnClickListener {
             // back to the previous screen.
             onBackPressed()
+        }
+        mActivityCartListBinding.btnCheckout.setOnClickListener {
+            val intent = Intent(this@CartListActivity, AddressListActivity::class.java)
+            intent.putExtra(Constants.EXTRA_SELECT_ADDRESS, true)
+            startActivity(intent)
         }
     }
 
@@ -68,7 +75,7 @@ class CartListActivity : BaseActivity() {
             mActivityCartListBinding.rvCartItemsList.layoutManager =
                 LinearLayoutManager(this@CartListActivity)
             mActivityCartListBinding.rvCartItemsList.setHasFixedSize(true)
-            val cartListAdapter = CartItemsListAdapter(this@CartListActivity, cartList)
+            val cartListAdapter = CartItemsListAdapter(this@CartListActivity, mCartListItems, true)
             mActivityCartListBinding.rvCartItemsList.adapter = cartListAdapter
             var subTotal = 0.0
 
@@ -107,7 +114,6 @@ class CartListActivity : BaseActivity() {
     private fun getProductList() {
         showProgressDialog(resources.getString(R.string.please_wait))
         FireStoreClass().getAllProductsList(this@CartListActivity)
-
     }
 
     fun successProductsListFromFireStore(productList: ArrayList<Product>) {

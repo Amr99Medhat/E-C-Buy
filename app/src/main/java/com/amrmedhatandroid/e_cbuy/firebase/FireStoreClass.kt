@@ -1,15 +1,11 @@
 package com.amrmedhatandroid.e_cbuy.firebase
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
 import android.util.Log
 import androidx.fragment.app.Fragment
-import com.amrmedhatandroid.e_cbuy.models.Address
-import com.amrmedhatandroid.e_cbuy.models.CartItem
-import com.amrmedhatandroid.e_cbuy.models.Product
+import com.amrmedhatandroid.e_cbuy.models.*
 import com.amrmedhatandroid.e_cbuy.utils.Constants
-import com.amrmedhatandroid.e_cbuy.models.User
 import com.amrmedhatandroid.e_cbuy.ui.activities.*
 import com.amrmedhatandroid.e_cbuy.ui.fragments.DashboardFragment
 import com.amrmedhatandroid.e_cbuy.ui.fragments.ProductsFragment
@@ -185,12 +181,18 @@ class FireStoreClass {
                     is CartListActivity -> {
                         activity.successCartItemsList(list)
                     }
+                    is CheckoutActivity -> {
+                        activity.successCartItemsList(list)
+                    }
                 }
 
             }
             .addOnFailureListener {
                 when (activity) {
                     is CartListActivity -> {
+                        activity.failedCartItemsList()
+                    }
+                    is CheckoutActivity -> {
                         activity.failedCartItemsList()
                     }
                 }
@@ -214,7 +216,7 @@ class FireStoreClass {
             }
     }
 
-    fun getAllProductsList(activity: CartListActivity) {
+    fun getAllProductsList(activity: Activity) {
         mFireStore.collection(Constants.PRODUCTS)
             .get()
             .addOnSuccessListener { document ->
@@ -224,10 +226,36 @@ class FireStoreClass {
                     product!!.product_id = p.id
                     productsList.add(product)
                 }
-                activity.successProductsListFromFireStore(productsList)
+                when (activity) {
+                    is CartListActivity -> {
+                        activity.successProductsListFromFireStore(productsList)
+                    }
+                    is CheckoutActivity -> {
+                        activity.successProductsListFromFireStore(productsList)
+                    }
+                }
             }
             .addOnFailureListener {
-                activity.failedGetAllProductsList()
+                when (activity) {
+                    is CartListActivity -> {
+                        activity.failedGetAllProductsList()
+                    }
+                    is CheckoutActivity -> {
+                        activity.failedGetAllProductsList()
+                    }
+                }
+            }
+    }
+
+    fun placeAnOrder(activity: CheckoutActivity, order: Order) {
+        mFireStore.collection(Constants.ORDERS)
+            .document()
+            .set(order, SetOptions.merge())
+            .addOnSuccessListener {
+                activity.orderPlacedSuccess()
+            }
+            .addOnFailureListener {
+                activity.hideProgressDialog()
             }
     }
 
@@ -305,7 +333,7 @@ class FireStoreClass {
                 }
                 activity.successAddressListFormFireStore(addressList)
             }.addOnFailureListener {
-                activity.failedUpdateMyCart()
+                activity.failedGetAddressesList()
             }
     }
 
@@ -332,6 +360,17 @@ class FireStoreClass {
             }
             .addOnFailureListener {
                 activity.failedAddAddress()
+            }
+    }
+
+    fun deleteAddress(activity: AddressListActivity, addressId: String) {
+        mFireStore.collection(Constants.ADDRESSES)
+            .document(addressId)
+            .delete()
+            .addOnSuccessListener {
+                activity.deleteAddressSuccess()
+            }.addOnFailureListener {
+                activity.failedDeleteAddress()
             }
     }
 
