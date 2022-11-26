@@ -23,6 +23,7 @@ class CheckoutActivity : BaseActivity() {
     private lateinit var mCartItemsList: ArrayList<CartItem>
     private var mSubTotal: Double = 0.0
     private var mTotalAmount: Double = 0.0
+    private lateinit var mOrderDetails: Order
 
     private lateinit var mActivityCheckoutBinding: ActivityCheckoutBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,7 +70,7 @@ class CheckoutActivity : BaseActivity() {
         showProgressDialog(resources.getString(R.string.please_wait))
 
         if (mAddressDetails != null) {
-            val order = Order(
+            mOrderDetails = Order(
                 FirebaseAuthClass().getCurrentUserID(),
                 mCartItemsList,
                 mAddressDetails!!,
@@ -77,15 +78,16 @@ class CheckoutActivity : BaseActivity() {
                 mCartItemsList[0].image,
                 mSubTotal.toString(),
                 "10.0",
-                mTotalAmount.toString()
+                mTotalAmount.toString(),
+                System.currentTimeMillis()
             )
 
-            FireStoreClass().placeAnOrder(this@CheckoutActivity, order)
+            FireStoreClass().placeAnOrder(this@CheckoutActivity, mOrderDetails)
         }
 
     }
 
-    fun orderPlacedSuccess() {
+    fun allDetailsUpdatedSuccessfully() {
         hideProgressDialog()
         Toast.makeText(
             this@CheckoutActivity,
@@ -97,6 +99,10 @@ class CheckoutActivity : BaseActivity() {
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finish()
+    }
+
+    fun orderPlacedSuccess() {
+        FireStoreClass().updateAllDetails(this@CheckoutActivity, mCartItemsList, mOrderDetails)
     }
 
     private fun getProductsList() {

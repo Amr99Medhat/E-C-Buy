@@ -18,6 +18,7 @@ class ProductDetailsActivity : BaseActivity() {
     private lateinit var mActivityProductDetailsBinding: ActivityProductDetailsBinding
     private var mProductId: String = ""
     private lateinit var mProductDetails: Product
+    private var mProductOwnerId = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,9 +30,9 @@ class ProductDetailsActivity : BaseActivity() {
             mProductId = intent.getStringExtra(Constants.EXTRA_PRODUCT_ID)!!
         }
 
-        var productOwnerId = ""
+        //var productOwnerId = ""
         if (intent.hasExtra(Constants.EXTRA_PRODUCT_OWNER_ID)) {
-            productOwnerId = intent.getStringExtra(Constants.EXTRA_PRODUCT_OWNER_ID)!!
+            mProductOwnerId = intent.getStringExtra(Constants.EXTRA_PRODUCT_OWNER_ID)!!
         }
 
 //        if (FirebaseAuthClass().getCurrentUserID() == productOwnerId) {
@@ -42,7 +43,7 @@ class ProductDetailsActivity : BaseActivity() {
 //            mActivityProductDetailsBinding.btnAddToCart.visibility = View.VISIBLE
 //        }
 
-        if (FirebaseAuthClass().getCurrentUserID() != productOwnerId) {
+        if (FirebaseAuthClass().getCurrentUserID() != mProductOwnerId) {
             mActivityProductDetailsBinding.btnAddToCart.visibility = View.VISIBLE
 
         }
@@ -138,6 +139,7 @@ class ProductDetailsActivity : BaseActivity() {
     private fun addToCart() {
         val cartItem = CartItem(
             FirebaseAuthClass().getCurrentUserID(),
+            mProductOwnerId,
             mProductId,
             mProductDetails.title,
             mProductDetails.price,

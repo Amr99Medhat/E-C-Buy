@@ -110,17 +110,26 @@
     <string name="title_select_address">SELECT ADDRESS</string>
     <string name="title_checkout">CHECKOUT</string>
     <string name="checkout_lbl_product_items">Product Items</string>
-    <string name="checkout_lbl_selected_address">Select Address</string>
+    <string name="checkout_lbl_selected_address">Selected Address</string>
     <string name="checkout_lbl_items_receipt">Items Receipt</string>
-    <string name="lbl_Payment_mode">Payment Mode</string>
     <string name="lbl_cash_or_delivery">Cash or Delivery</string>
     <string name="btn_lbl_place_order">PLACE ORDER</string>
     <string name="lbl_cash_on_delivery">Cash On Delivery</string>
     <string name="lbl_payment_mode">Payment Mode</string>
+    <string name="no_orders_placed_yet">No orders placed yet!</string>
+    <string name="title_my_order_details">MY ORDER DETAILS</string>
+    <string name="order_details_lbl">Order Details</string>
+    <string name="order_details_lbl_order_id">Order ID</string>
+    <string name="order_details_lbl_order_date">Order Date</string>
+    <string name="order_details_lbl_order_status">Order Status</string>
+    <string name="order_status_pending">Pending</string>
+    <string name="order_details_lbl_shipping_address">Shipping Address</string>
+    <string name="order_status_in_process">In Process</string>
+    <string name="order_status_delivered">Delivered</string>
+    <string name="title_sold_products">Sold Products</string>
+    <string name="no_products_sold_out_yet">No products sold yet!</string>
+    <string name="title_sold_product_details">SOLD PRODUCTS DETAILS</string>
 
-
-    <!--    In (fragment_base)-->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

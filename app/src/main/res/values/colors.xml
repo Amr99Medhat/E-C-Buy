@@ -17,4 +17,7 @@
     <color name="colorOffWhite">#F8F8F8</color>
     <color name="itemValueTextColor">#545353</color>
     <color name="dashboardItemDetailsBackground">#F3F3F3</color>
+    <color name="colorOrderStatusInProcess">#FF9800</color>
+    <color name="colorOrderStatusDelivered">#8BC34A</color>
+
 </resources>

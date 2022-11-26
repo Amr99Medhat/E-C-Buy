@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ECBuy">
         <activity
-            android:name=".ui.activities.CheckoutActivity"
+            android:name=".ui.activities.SoldProductDetailsActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.ECBuy.NoActionBar">
@@ -21,14 +21,20 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".ui.activities.MyOrderDetailsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.ECBuy.NoActionBar" />
+        <activity
+            android:name=".ui.activities.CheckoutActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.ECBuy.NoActionBar" />
+        <activity
             android:name=".ui.activities.AddEditAddressActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.ECBuy.NoActionBar">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+            android:theme="@style/Theme.ECBuy.NoActionBar" />
         <activity
             android:name=".ui.activities.AddressListActivity"
             android:exported="false"

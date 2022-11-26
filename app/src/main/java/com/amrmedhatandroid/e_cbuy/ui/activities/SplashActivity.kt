@@ -28,7 +28,7 @@ class SplashActivity : AppCompatActivity() {
         }
 
         Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(Intent(applicationContext, LoginActivity::class.java))
+            startActivity(Intent(applicationContext, DashboardActivity::class.java))
             finish()
         }, 2500)
 

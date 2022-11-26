@@ -4,13 +4,17 @@ import android.app.Activity
 import android.content.Context
 import android.util.Log
 import androidx.fragment.app.Fragment
+import com.amrmedhatandroid.e_cbuy.R
 import com.amrmedhatandroid.e_cbuy.models.*
 import com.amrmedhatandroid.e_cbuy.utils.Constants
 import com.amrmedhatandroid.e_cbuy.ui.activities.*
 import com.amrmedhatandroid.e_cbuy.ui.fragments.DashboardFragment
+import com.amrmedhatandroid.e_cbuy.ui.fragments.OrdersFragment
 import com.amrmedhatandroid.e_cbuy.ui.fragments.ProductsFragment
+import com.amrmedhatandroid.e_cbuy.ui.fragments.SoldProductsFragment
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import com.google.firebase.firestore.ktx.toObject
 
 class FireStoreClass {
 
@@ -371,6 +375,94 @@ class FireStoreClass {
                 activity.deleteAddressSuccess()
             }.addOnFailureListener {
                 activity.failedDeleteAddress()
+            }
+    }
+
+    fun updateAllDetails(activity: CheckoutActivity, cartList: ArrayList<CartItem>, order: Order) {
+        val writeBatch = mFireStore.batch()
+
+        for (cartItem in cartList) {
+            //val productHasMap = HashMap<String, Any>()
+
+//            productHasMap[Constants.STOCK_QUANTITY] =
+//                (cartItem.stock_quantity.toInt() - cartItem.cart_quantity.toInt()).toString()
+
+            val soldProduct = SoldProduct(
+                cartItem.product_owner_id,
+                cartItem.title,
+                cartItem.price,
+                cartItem.cart_quantity,
+                cartItem.image,
+                order.title,
+                order.order_datetime,
+                order.sub_total_amount,
+                order.shipping_charge,
+                order.total_amount,
+                order.address
+            )
+
+            val documentReference = mFireStore.collection(Constants.SOLD_PRODUCTS)
+                .document(cartItem.product_id)
+
+            writeBatch.set(documentReference, soldProduct)
+        }
+
+        for (cartItem in cartList) {
+            val documentReference = mFireStore.collection(Constants.CART_ITEMS)
+                .document(cartItem.id)
+
+            writeBatch.delete(documentReference)
+
+        }
+        writeBatch.commit().addOnSuccessListener {
+            activity.allDetailsUpdatedSuccessfully()
+        }
+            .addOnFailureListener {
+                activity.hideProgressDialog()
+            }
+    }
+
+    fun getSoldProductsList(fragment: SoldProductsFragment) {
+        mFireStore.collection(Constants.SOLD_PRODUCTS)
+            .whereEqualTo(Constants.USER_ID, FirebaseAuthClass().getCurrentUserID())
+            .get()
+            .addOnSuccessListener { document ->
+                val list: ArrayList<SoldProduct> = ArrayList()
+
+                for (i in document.documents) {
+
+                    val soldProduct = i.toObject(SoldProduct::class.java)!!
+                    soldProduct.id = i.id
+
+                    list.add(soldProduct)
+
+                }
+
+                fragment.successSoldProductsList(list)
+            }
+            .addOnFailureListener {
+                fragment.hideProgressDialog()
+            }
+    }
+
+
+    fun getMyOrdersList(fragment: OrdersFragment) {
+        mFireStore.collection(Constants.ORDERS)
+            .whereEqualTo(Constants.USER_ID, FirebaseAuthClass().getCurrentUserID())
+            .get()
+            .addOnSuccessListener { document ->
+                val list: ArrayList<Order> = ArrayList()
+
+                for (i in document.documents) {
+                    val orderItem = i.toObject(Order::class.java)!!
+                    orderItem.id = i.id
+
+                    list.add(orderItem)
+                }
+                fragment.populateOrdersListUI(list)
+            }
+            .addOnFailureListener {
+                fragment.hideProgressDialog()
             }
     }
 
